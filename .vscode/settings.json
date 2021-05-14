@@ -1,0 +1,17 @@
+{
+    "ARDUINO_AVR_PATH":"/Users/macbook/Library/Arduino15/packages/arduino/hardware/avr/1.8.3",
+    "ARDUINO_AVRTOOLCHAIN_PATH":"/Users/macbook/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7",
+    "ARDUINO_AVRDUDE_PATH":"/Users/macbook/Library/Arduino15/packages/arduino/tools/avrdude/6.3.0-arduino17",
+    "ARDUINO_BOOTLOADER_VARIANT":"atmega328old",
+    "ARDUINO_SERIAL_PORT":"/dev/cu.usbserial-143240",
+    "ARDUINO_SKETCH_NAME": "arduino_vscode_sample.ino",
+    "DWIRE_EXECUTABLE":"/Users/macbook/Downloads/dwire-debug-master/dwdebug",
+    "QEMU_AVR_BIN":"/usr/local/Cellar/qemu/5.2.0_1/bin/qemu-system-avr",
+    "cSpell.ignoreWords": [
+        "println",
+        "serprintbuf"
+    ],
+    "files.associations": {
+        "twi.h": "c"
+    }
+}

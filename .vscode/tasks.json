@@ -1,0 +1,207 @@
+{   
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build",
+            "type": "shell",
+            "command": "arduino-cli compile --output-dir ${workspaceFolder}/build -b arduino:avr:nano:cpu=${config:ARDUINO_BOOTLOADER_VARIANT} ${workspaceFolder}",
+            "group": "build",
+            "isBackground": false,
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Build For Debug",
+            "type": "shell",
+            "command": "arduino-cli compile --optimize-for-debug --output-dir ${workspaceFolder}/build -b arduino:avr:nano:cpu=${config:ARDUINO_BOOTLOADER_VARIANT} ${workspaceFolder}",
+            "group": "build",
+            "isBackground": false,
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Flash with Arduino bootloader",
+            "type": "shell",
+            "command": "arduino-cli upload -v --input-dir ${workspaceFolder}/build -p ${config:ARDUINO_SERIAL_PORT} -b arduino:avr:nano:cpu=${config:ARDUINO_BOOTLOADER_VARIANT} ${workspaceFolder}",
+            "group": "build",
+            "isBackground": false,
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Flash App with Usbtiny ISP",
+            "type": "shell",
+            "command": "${config:ARDUINO_AVRDUDE_PATH}/bin/avrdude -p atmega328p -c usbtiny -C ${config:ARDUINO_AVRDUDE_PATH}/etc/avrdude.conf -U flash:w:${workspaceFolder}/build/${config:ARDUINO_SKETCH_NAME}.hex:i",
+            "group": "build",
+            "isBackground": false,
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Flash App & Bootloader with Usbtiny ISP",
+            "type": "shell",
+            "command": "${config:ARDUINO_AVRDUDE_PATH}/bin/avrdude -p atmega328p -c usbtiny -C ${config:ARDUINO_AVRDUDE_PATH}/etc/avrdude.conf -U flash:w:${workspaceFolder}/build/${config:ARDUINO_SKETCH_NAME}.with_bootloader.hex:i",
+            "group": "build",
+            "isBackground": false,
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Flash with Usbtiny DWIRE",
+            "type": "shell",
+            "command": "echo l ${workspaceFolder}/build/${config:ARDUINO_SKETCH_NAME}.elf | ${config:DWIRE_EXECUTABLE} device usbtiny1",
+            //echo l myoutput.elf | dwdebug.exe device com3 62500
+            "group": "build",
+            "isBackground": false,
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Serial monitor",
+            "type": "shell",
+            "command": "minicom -D ${config:ARDUINO_SERIAL_PORT} -b 9600 ",
+            "group": "build",
+            //osascript -e 'tell app "Terminal" to do script "cd ~/somewhere"'
+            //echo l myoutput.elf | dwdebug.exe device com3 62500
+            "isBackground": false,
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Build and Flash",
+            "type": "shell",
+            "group": "build",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Build",
+                "Flash with Arduino bootloader"
+            ],
+            "isBackground": false,
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Build, Flash and Monitor",
+            "type": "shell",
+            "group": "build",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Build",
+                "Flash with Arduino bootloader",
+                "Serial monitor"
+            ],
+            "isBackground": false,
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true
+            },
+            "problemMatcher": []
+        },
+        /////////////////////////////////////////////////
+        // _________This is for QEMU Session___________//
+        /////////////////////////////////////////////////
+        {
+            "label": "QEMU serial terminal in external window",
+            "type": "shell",
+            "command": "osascript -e 'tell app \"Terminal\" to do script \"telnet localhost 5678\"'",
+            //osascript -e 'tell app "Terminal" to do script "cd ~/somewhere"'
+            //echo l myoutput.elf | dwdebug.exe device com3 62500
+            "isBackground": false,
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "QEMU serial terminal",
+            "type": "shell",
+            "command": "telnet localhost 5678",
+            //osascript -e 'tell app "Terminal" to do script "cd ~/somewhere"'
+            //echo l myoutput.elf | dwdebug.exe device com3 62500
+            "isBackground": false,
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Rebuild and open terminal",
+            "type": "shell",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Build For Debug"
+            ],
+            "isBackground": false,
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true
+            },
+            "problemMatcher": []
+        }
+    ]
+}

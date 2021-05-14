@@ -1,0 +1,42 @@
+{
+    "configurations": [
+        {
+            "name": "Arduino MAC",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${config:ARDUINO_AVR_PATH}/cores/arduino",
+                "${config:ARDUINO_AVR_PATH}/libraries/EEPROM/src",
+                "${config:ARDUINO_AVR_PATH}/libraries/HID/src",
+                "${config:ARDUINO_AVR_PATH}/libraries/SoftwareSerial/src",
+                "${config:ARDUINO_AVR_PATH}/libraries/SPI/src",
+                "${config:ARDUINO_AVR_PATH}/libraries/Wire/src",
+                "${config:ARDUINO_AVR_PATH}/libraries/SPI/src",
+                "${config:ARDUINO_AVR_PATH}/variants/standard",
+                "${config:ARDUINO_AVR_PATH}/libraries/arduino_esp_master"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE",
+                "F_CPU=16000000L",
+                "ARDUINO=10805",
+                "ARDUINO_AVR_UNO",
+                "ARDUINO_ARCH_AVR",
+                "USBCON"
+            ],
+            "browse": {
+                "path": [
+                    "${config:ARDUINO_AVR_PATH}",
+                    "${workspaceRoot}"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            },
+            "compilerPath": "${config:ARDUINO_AVRTOOLCHAIN_PATH}/bin/avr-gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "macos-gcc-x64"
+        }
+    ],
+    "version": 4
+}
